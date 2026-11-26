@@ -3,13 +3,15 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { AuthApi, PedidoApi, ProdutoApi } from './core/api/apis';
+import { AdminApi, AuthApi, PedidoApi, ProdutoApi } from './core/api/apis';
 import { APP_CONFIG } from './core/config';
 import { apiErrorInterceptor } from './core/http/api-error.interceptor';
 import { credenciaisInterceptor } from './core/http/credenciais.interceptor';
+import { HttpAdminApi } from './core/http/http-admin.api';
 import { HttpAuthApi } from './core/http/http-auth.api';
 import { HttpPedidoApi } from './core/http/http-pedido.api';
 import { HttpProdutoApi } from './core/http/http-produto.api';
+import { MockAdminApi } from './core/mock/mock-admin.api';
 import { MockAuthApi } from './core/mock/mock-auth.api';
 import { MockPedidoApi } from './core/mock/mock-pedido.api';
 import { MockProdutoApi } from './core/mock/mock-produto.api';
@@ -29,5 +31,6 @@ export const appConfig: ApplicationConfig = {
     { provide: AuthApi, useClass: mock ? MockAuthApi : HttpAuthApi },
     { provide: ProdutoApi, useClass: mock ? MockProdutoApi : HttpProdutoApi },
     { provide: PedidoApi, useClass: mock ? MockPedidoApi : HttpPedidoApi },
+    { provide: AdminApi, useClass: mock ? MockAdminApi : HttpAdminApi },
   ],
 };
